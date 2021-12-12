@@ -3,10 +3,10 @@ FIP is an open-source project to create a __machine learning robot__ that can mo
 I strongly believe robotization is our path to a better and sustainable future for humankind.
 To get to that point we don't need just machines that can complete our tasks, but that can also think their way. 
 
-[What should be FIP?](#What-should-be-FIP?)
-[Why Open Source?](#Why-Open-Source)
-[How we survive?](#Do-we-have-any-sort-of-business-or-funding?)
-[What will be next?](#What-will-be-next?)
+- [What should be FIP?](#What-should-be-FIP?)
+- [Why Open Source?](#Why-Open-Source)
+- [How we survive?](#Do-we-have-any-sort-of-business-or-funding?)
+- [What will be next?](#What-will-be-next?)
 
 ## What should be FIP?
 Right now FIP doesn't exist, but it should be a bunch of servo motors with at his earth, an old android phone. Since creating an OS is a very complicated thing and we want to concentrate on the interesting part, we'll focus on creating an app that can give the output to the motors to make them move and read their data, with the data of the phone itself (GPS, accelerometer), process it with a machine learning algorithm.
