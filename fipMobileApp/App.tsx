@@ -8,13 +8,16 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
+  Linking,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
+  Switch,
   Text,
+  ToastAndroid,
   useColorScheme,
   View,
 } from 'react-native';
@@ -26,6 +29,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import { PermissionsAndroid } from 'react-native';
 
 const Section: React.FC<{
   title: string;
@@ -55,7 +59,22 @@ const Section: React.FC<{
   );
 };
 
+
 const App = () => {
+
+
+
+
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitchLocation = () => {
+    if (PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION) {
+      setIsEnabled(true);
+      requestLocationPermission();
+    } else {
+      setIsEnabled(false);
+    }
+  };
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -72,8 +91,26 @@ const App = () => {
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
+          }} >
+          <Section title="First Intelligent Prometheus">
+            <Text>  
+              FIP is an open-source project to create a machine learning robot that can move and complete simple tasks.
+            </Text>
+            <Text style={{color: 'blue'}}
+                  onPress={() => Linking.openURL('https://github.com/EOTheDev/first-intelligent-prometheus')}>
+              {"\n\n"}Get to the project.
+            </Text>
+          </Section>
+          <Section title="Settings">
+           <Text onPress={  requestLocationPermission }> Location </Text>
+           <Switch
+              trackColor={{ false: "#767577", true: "#81b0ff" }}
+              thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitchLocation}
+              value={isEnabled}
+            />
+            {"\n\n"}
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
           </Section>
@@ -113,3 +150,32 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
+
+
+
+/**
+ * Request location permission
+ * TODO: if not given, get out of the app.
+ */
+export async function requestLocationPermission() 
+{
+try {
+  const granted = await PermissionsAndroid.request(
+    PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+    )
+  if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+    console.log("You can use the location")
+    alert("You can use the location");
+  } else {
+    console.log("location permission denied")
+    alert("Location permission denied");
+  }
+} catch (err) {
+  console.warn(err)
+}
+}
+
+function alert(message: string) {
+  ToastAndroid.show(message, ToastAndroid.LONG);
+}
