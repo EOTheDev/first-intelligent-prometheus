@@ -10,6 +10,7 @@
 
 import React, { useState } from 'react';
 import {
+  Button,
   Linking,
   SafeAreaView,
   ScrollView,
@@ -30,124 +31,43 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { PermissionsAndroid } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 
-const Section: React.FC<{
-  title: string;
-}> = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+import { Home } from './screens/Home';
+import { Profile } from './screens/Profile';
 
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+
+
+type RootStackParamList = {
+    Home: undefined;
+    Profile: { userId: string };
+  };
+  
+export const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 const App = () => {
-
-
-
-
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitchLocation = () => {
-    if (PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION) {
-      setIsEnabled(true);
-      requestLocationPermission();
-    } else {
-      setIsEnabled(false);
-    }
-  };
-
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+      
+  const user = {
+    id: "1apro42X", name: 'John Doe',  email: 'test@gmail.com'
+  }
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }} >
-          <Section title="First Intelligent Prometheus">
-            <Text>  
-              FIP is an open-source project to create a machine learning robot that can move and complete simple tasks.
-            </Text>
-            <Text style={{color: 'blue'}}
-                  onPress={() => Linking.openURL('https://github.com/EOTheDev/first-intelligent-prometheus')}>
-              {"\n\n"}Get to the project.
-            </Text>
-          </Section>
-          <Section title="Settings">
-           <Text onPress={  requestLocationPermission }> Location </Text>
-           <Switch
-              trackColor={{ false: "#767577", true: "#81b0ff" }}
-              thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitchLocation}
-              value={isEnabled}
-            />
-            {"\n\n"}
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+  <NavigationContainer>
+    <RootStack.Navigator initialRouteName="Home">
+      <RootStack.Screen name="Home" component={Home} />
+      <RootStack.Screen
+        name="Profile"
+        component={Profile}
+        initialParams={{ userId: user.id }}
+      />
+    </RootStack.Navigator>
+  </NavigationContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+
 
 export default App;
 
@@ -176,6 +96,6 @@ try {
 }
 }
 
-function alert(message: string) {
+export function alert(message: string) {
   ToastAndroid.show(message, ToastAndroid.LONG);
 }
