@@ -3,7 +3,7 @@ FIP is an open-source project to create a __machine learning robot__ that can mo
 I strongly believe robotization is our path to a better and sustainable future for humankind.
 To get to that point we don't need just machines that can complete our tasks, but that can also think their way. 
 
-> [logo]("/FipMobileApp/Fip app logo.jpg")
+> ![logo](./FipMobileApp/Fip-app-logo.jpg)
 
 - [What should be FIP?](#What-should-be-FIP)
 - [Why Open Source?](#Why-Open-Source)
