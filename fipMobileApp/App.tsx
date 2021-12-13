@@ -14,6 +14,7 @@ import {
   Linking,
   SafeAreaView,
   ScrollView,
+  
   StatusBar,
   StyleSheet,
   Switch,
@@ -35,17 +36,21 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { Home } from './screens/Home';
 import { Profile } from './screens/Profile';
+import { Settings } from './screens/Settings';
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Help } from './screens/Help';
 
 
 type RootStackParamList = {
     Home: undefined;
     Profile: { userId: string };
+    Settings: undefined;
+    Help: undefined;
   };
-  
-export const RootStack = createNativeStackNavigator<RootStackParamList>();
+
+export const RootStack = createBottomTabNavigator<RootStackParamList>();
 
 const App = () => {
       
@@ -62,6 +67,8 @@ const App = () => {
         component={Profile}
         initialParams={{ userId: user.id }}
       />
+      <RootStack.Screen name="Settings" component={Settings} />
+      <RootStack.Screen name="Help" component={Help} />
     </RootStack.Navigator>
   </NavigationContainer>
   );
