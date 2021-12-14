@@ -41,6 +41,10 @@ import { Settings } from './screens/Settings';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Help } from './screens/Help';
+import Realm, { User } from "realm";
+import { UserModel } from './model/UserModel';
+import Splash from './screens/Splash';
+
 
 
 type RootStackParamList = {
@@ -48,15 +52,52 @@ type RootStackParamList = {
     Profile: { userId: string };
     Settings: undefined;
     Help: undefined;
+    Splash: undefined;
   };
 
 export const RootStack = createBottomTabNavigator<RootStackParamList>();
 
+async function loadData() {
+  const user = {
+    name: 'User', 
+    properties: {
+      _id: "1apro42X",
+      firstName: 'John Doe',
+      email: 'test@gmail.com'
+    }
+  };
+  let user1, user2;
+
+  const realm = await Realm.open({
+    schema: [user],
+  });
+
+  realm?.write(() => {
+    realm.create<UserModel>( "User", {
+      _id: "22222apro42X",
+      firstName: 'polpetta'
+      })
+    realm.create<UserModel>( "User" , {
+      _id: "33333apro42X",
+      firstName: 'polo'
+    })
+  });
+
+  // alert( user1.firstName+" "+user2.firstName);
+  
+
+  const users = realm.objects('User');
+  alert( "there are " + users.length + " users");
+  const usersNoEmail = users.filtered("email == null || email == ''");
+  alert( "there are " + usersNoEmail.length + " users with no email");
+
+  return users;
+}
+
 const App = () => {
       
-  const user = {
-    id: "1apro42X", name: 'John Doe',  email: 'test@gmail.com'
-  }
+  let user = { id:"1apro42X", name:"John Doe"};
+
 
   return (
   <NavigationContainer>
@@ -69,6 +110,8 @@ const App = () => {
       />
       <RootStack.Screen name="Settings" component={Settings} />
       <RootStack.Screen name="Help" component={Help} />
+      <RootStack.Screen name="Splash" component={Splash} />
+
     </RootStack.Navigator>
   </NavigationContainer>
   );

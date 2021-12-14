@@ -8,6 +8,8 @@ import { alert, requestLocationPermission } from "../App";
 
 
 export const Home = () => {
+
+    
     return (
     <ScrollView>
         <Text>Home</Text>
