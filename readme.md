@@ -22,6 +22,8 @@ I do believe in the power of community and it has no sense to close knowledge to
 ## Do we have any sort of business or funding?
 Nope, at the moment there is just me, a full-stack software developer, with 0 to no money. I don't plan to make anyone pay for the software we create, __this is free to use__, even for the competitors. No problem. More competitors more innovation, hoping they do the same way. In any case, in the future, if the product will be completed and working fine, we may pay our living __by selling the hardware__ stuff, the robot itself, but if anyone has the capabilities to build their own, they should do so and then install freely our app!
 
+> Right now you could help us either contributing to the code, or think about donating [here](https://paypal.me/OrtaE?country.x=IT&locale.x=it_IT).
+
 ## What will be next? 
 Firstly we have to get FIP done, but the plan would be then to modify the app to support __being part of a blockchain__ where the FIPs support each other by __connecting data__ via Bluetooth and the biggest and more powerful phones could __in a decentralized way develop stronger algorithms__ which would be always through Bluetooth passed to the older or weaker FIPs. 
 
