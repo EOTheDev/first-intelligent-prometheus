@@ -35,6 +35,6 @@ Firstly you need to clone the repository in the folder you want it in.
 
 After that you need go to the app directory and run `npm install` to install all the dependencies.
 
-> `cd first-intelligent-prometheus && npm install`
+> `cd first-intelligent-prometheus/fipMobileApp && npm install`
 
 Then you can run the app with the android emulator (which you need to have installed) by running `npm run android`.
