@@ -38,3 +38,7 @@ After that you need go to the app directory and run `npm install` to install all
 > `cd first-intelligent-prometheus/fipMobileApp && npm install`
 
 Then you can run the app with the android emulator (which you need to have installed) by running `npm run android`.
+
+> `npm run android`
+
+Got it! Now you can see the app running in the emulator and start editing the code.
